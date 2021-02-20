@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bwf.shop.admin.mapper.SkuMapper">
+   <insert id="addSpuSkuList">
+
+      insert into sku (sku_spu_id,sku_name,sku_spuattr,sortno,createtime,updatetime )
+      values
+ <foreach collection="skuAddBoList" item="SkuAddBo" separator=",">
+
+    (#{spu_id},#{SkuAddBo.sku_name},#{SkuAddBo.sku_spuattr},#{SkuAddBo.sortno},#{SkuAddBo.createtime},#{SkuAddBo.updatetime})
+
+
+ </foreach>
+
+   </insert>
+
+
+</mapper>

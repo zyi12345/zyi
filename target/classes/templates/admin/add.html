@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加员工表单页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap4.min.css}"/>
+    <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap4.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid mt-2">
+    <form name="from1" th:action="@{/admin/save}" method="post">
+        <div class="my-1 pl-1">登录账户名称:</div>
+        <input type="text" name="admin_name" class="form-control" placeholder="请输入账户名称" >
+        <div class="my-1 pl-3"></div>
+        <div class="my-1 pl-1">员工姓名:</div>
+        <input type="text" name="admin_nickname" class="form-control" placeholder="请输入员工姓名">
+        <div class="my-1 pl-3"></div>
+        <div class="my-1 pl-1">员工角色:</div>
+        <select name="role_id" class="form-control">
+            <option th:each="role:${roleList}" th:value="${role.role_id}" th:text="${role.role_name}">显示角色</option>
+
+        </select>
+        <div class="my-1 pl-3"></div>
+        <button  class="btn btn-danger form-control">添加员工</button>
+
+
+
+    </form>
+</div>
+
+<!--表示当前的项目路径-->
+<script th:inline="javascript">
+    var context=[[@{/}]];
+
+
+</script>
+
+
+<script>
+
+    $(function(){
+     $("input[name='admin_name']").change(function(){
+    //获取用户填写的账户名称
+    var admin_name=$(this).val();
+    //发送ajax异步请求 验证，账户名称是否可以使用
+    $.ajax({
+    url:context+"admin/validAdminName",
+    type:"POST",
+    data:{"admin_name":admin_name},
+    success:function(response){
+    console.log("ajax success");
+    if(response=="1"){
+     $("input[name='admin_name']").next("div").html("可以添加");
+    }else if(response=="0"){
+     $("input[name='admin_name']").next("div").html("<font color='red'>该账户已经被使用，请重新填写！</font>");
+
+
+    }
+
+
+    }
+
+
+    })
+
+
+    })
+
+
+   });
+
+
+
+</script>
+
+</body>
+
+</html>

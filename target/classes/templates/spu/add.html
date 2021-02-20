@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品表单页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap4.min.css}"/>
+    <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap4.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid mt-2 " >
+    <form name="from1" th:action="@{/spu/save}" method="post" enctype="multipart/form-data">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tab" data-target="#tab1">商品基础信息</a></li>
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tab" data-target="#tab2">商品相册</a></li>
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tab" data-target="#tab3">商品规格</a></li>
+            <li class="nav-item"><a href="" class="nav-link" data-toggle="tab" data-target="#tab4">商品属性值</a></li>
+        </ul>
+        <div class= "tab-content">
+            <div class="tab-pane active container" id="tab1">
+
+                <!--spu 商品表对应的控件-->
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品名称:</div></div>
+            <input type="text" name="spu_name" class="form-control" placeholder="商品名称" >
+       </div>
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品标题:</div></div>
+            <input type="text" name="spu_title" class="form-control" placeholder="商品标题" >
+        </div>
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">封面图片:</div></div>
+            <input type="file" name="spu_thumburl_img" class="form-control" placeholder="封面图片" >
+        </div>
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品起价:</div></div>
+            <input type="text" name="spu_price" class="form-control" placeholder="商品起价" >
+        </div>
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品库存:</div></div>
+            <input type="text" name="spu_stock" class="form-control" placeholder="商品库存" >
+        </div>
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">预警库存:</div></div>
+            <input type="text" name="spu_warningstock" class="form-control" placeholder="预警库存" >
+        </div>
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">限购数量:</div></div>
+            <input type="text" name="spu_maxbuy" class="form-control" placeholder="限购数量" >
+        </div>
+
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品单位:</div></div>
+            <input type="text" name="spu_unit" class="form-control" placeholder="商品单位" >
+        </div>
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品状态:</div></div>
+          <select  name="spu_status" class="form-control">
+
+              <option value="0"> 上架</option>
+              <option value="1"> 下架</option>
+
+
+          </select>
+        </div>
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品品牌:</div></div>
+            <select  name="spu_brand_id" class="form-control">
+
+                <option th:each="brand:${brandList}" th:value="${brand.id}" th:text="${brand.brand_name}">品牌名称</option>
+
+
+
+            </select>
+        </div>
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品分类:</div></div>
+            <select   class="form-control category1">
+                <option value="-1">---选择分类---</option>
+                <option th:each="c:${categoryList}" th:value="${c.id}" th:text="${c.cate_name}"></option>
+            </select>
+
+            <select  name="spu_category_id" class="form-control category2">
+
+            </select>
+        </div>
+
+
+        <div class="input-group my-1">
+            <div class="input-group- prepend"><div class="input-group-text">商品介绍:</div></div>
+            <textarea rows="4" name="spu_introduction" class="form-control" placeholder="商品介绍"></textarea>
+        </div>
+        <!--spu 商品规格对应的控件   -->
+            </div>
+        <!-- spuBanner商品相册图片对应的控件-->
+
+        <div class="tab-pane container fade" id="tab2">
+            <button type="button" class="btn btn-primary btn-add-banner my-2">添加相册图片</button>
+            <div class="spu-banner-group" >
+                <div class="spu-banner row my-2">
+                    <div class="col-6">
+                        <div class=" input-group">
+                            <div class="input-group-prepend"><div class="input-group-text">相册名称:</div></div>
+                            <input type="text" name="spuBannerAddBoList[0].spu_banner_name" class="form-control spu_banner_name" placeholder="相册名称" >
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class=" input-group">
+                            <div class="input-group-prepend"><div class="input-group-text">相册图片:</div></div>
+                            <input type="file" name="spuBannerAddBoList[0].spu_banner_img" class="form-control spu_banner_img" placeholder="相册图片" >
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+            <!-- spuBanner商品相册图片对应的控件-->
+
+
+
+            <!--sku 商品规格对应的控件   -->
+            <div class="tab-pane container fade" id="tab3">
+
+        <button type= "button" class= "btn btn-primary btn-add-sku my-2" >添加规格</button>
+
+            <div class="spu-sku">
+                <div class="sku my-2" sku-index="0">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend"><div class="input-group-text">规格名称:</div></div>
+                                    <input type="text" name="skuAddBoList[0].sku_name" class="form-control sku_name" placeholder="规格名称">
+
+                        </div>
+                    </div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend"><div class="input-group-text">规格排序:</div> </div>
+                                    <input type="text" name="skuAddBoList[0].sortno" class="form-control sortno" placeholder="规格排序">
+                                </div>
+                            </div>
+
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary btn-add-skuvalue form-control">
+                                添加规格值
+                            </button>
+
+                        </div>
+                    </div>
+
+
+
+                <div class="sku_value my-2" sku-value-index="0">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend"><div  class="input-group-text">规格值图片:</div></div>
+                                    <input type="file" name="skuAddBoList[0].skuValueList[0].sku_value_img"
+                                           class="form-control sku_value_img" placeholder="规格值图片">
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend"><div  class="input-group-text">规格值文本:</div></div>
+                                    <input type="text" name="skuAddBoList[0].skuValueList[0].sku_value_text"                                   class="form-control sku_value_text" placeholder="规格值文本">
+                                </div>
+                            </div>
+
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend"><div  class="input-group-text">规格值增加:</div></div>
+                                    <input type="text" name="skuAddBoList[0].skuValueList[0].sku_value_price"
+                                           class="form-control sku_value_price" placeholder="规格值增加">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--sku 商品规格对应的控件   -->
+
+
+            <!-- SpuAttrValue属性值关联对应的控件-->
+
+            <div class="tab-pane container fade" id="tab4">
+                <button type="button" class="btn btn-primary btn-add-attr-value my-2">添加属性值</button>
+                <div class="attr-value-group" >
+                    <div class="attr-value row my-2">
+                        <div class="col-6">
+                           <select class="form-control select-attr-key">
+                               <option value="-1">--选择属性键-- </option>
+                               <option th:each="attrKey:${spuAttrKeyList}"
+                                       th:value="${attrKey.id}"
+                                       th:text="${attrKey.key_name}">
+
+
+
+                              </option>
+
+
+                           </select>
+                        </div>
+
+                        <div class="col-6">
+                            <select name="spuAttrValueList[0].id"
+
+                                    class="form-control select-attr-value">
+                                <option value="-1">--选择属性值-- </option>
+
+
+
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- SpuAttrValue属性值关联对应的控件-->
+
+
+
+
+                    </div>
+
+                    <button class="btn btn-danger form-control">添加商品</button>
+
+                </form>
+
+            </div>
+
+            <!--表示当前的项目路径-->
+<script th:inline="javascript">
+    var context=[[@{/}]];
+
+
+</script>
+
+<script>
+
+    $(function(){
+   //改变属性键的下拉选项
+   $(".select-attr-key") .change (function(){
+   let that = $(this);
+   //获取当前用户选择的属性键编号
+     let key_id = $(this).val();
+ //发送ajax请求根据用户选择的属性键编号获取对应的属性值列表
+    $.ajax({
+         url : context+"spuAttValue/getAttrValueListByAttrKeyId" ,
+         type : "GET",
+         data : {"attr_key_id" : key_id},
+         success : function(response){
+         //先将对应的属性值下拉列表中的原来的选项清空
+        that.parents(".attr-value").find(".select-attr-value").empty();
+   //迭代遍历每一个属性值
+  for(let attr_value of JSON.parse(response)){
+   //根据当前迭代到属性值创建option 选项添加到对应的属性值下拉列表中
+     that.parents(".attr-value").find(".select-attr-value").get(0)
+    .options.add(new Option(attr_value.value_name , attr_value.id));
+
+     }
+
+
+          }
+
+
+
+        })
+
+
+
+    });
+
+
+
+
+
+    //点击添加属性值
+    $(".btn-add-attr-value" ).click(function(){
+    let attr_value = $(".attr-value").last().clone (true);
+     let index =$(".attr-value").length;
+    attr_value.find(".select-attr-value").attr("name","spuAttrValueList["+index+"].id");
+
+
+     attr_value.appendTo($(".attr-value-group"));
+
+
+     })
+
+
+
+
+
+    //点击添加相册图片
+     $(".btn-add-banner").click(function(){
+       //复制相册组件
+      let spu_banner = $(".spu-banner").last().clone(true);
+       //获取当前相册控件的索引
+      let index = $(".spu-banner").length;
+     //改变复制相册的控件的name属性
+      spu_banner.find(".spu_banner_name ").attr("name","spuBannerAddBoList["+ index+"].spu_banner_name");
+      spu_banner.find(".spu_banner_img ").attr("name","spuBannerAddBoList["+ index+"].spu_banner_img");
+
+      //复制的相册控件添加到相册控件组中
+       spu_banner.appendTo($(".spu-banner-group"))
+
+
+
+
+     })
+
+
+
+
+
+       //点击添加规格
+       //复制整个规格组
+       $(".btn-add-sku").click(function(){
+       let sku= $(".sku").last().clone(true);
+
+       //获取当前复制规格组的 规格索引
+       let sku_index = $(".sku").length;
+        //修改当前复制的规格索引
+        sku.attr("sku-index", sku_index);
+        //修改当前克隆的规格组的两个规格控件的name属性
+        sku.find(".sku_name").attr("name", " skuAddBoList["+sku_index+"].sku_name")
+        sku.find(".sortno").attr("name", " skuAddBoList["+sku_index+"].sortno")
+       //修改三个规格值控件的name属性
+      sku.find(".sku_value_img").attr("name","skuAddBoList ["+sku_index+"].skuValueList[0].sku_value_img")
+      sku.find(".sku_value_text").attr("name","skuAddBoList ["+sku_index+"].skuValueList[0].sku_value_text")
+      sku.find(".sku_value_price").attr("name","skuAddBoList ["+sku_index+"].skuValueList[0].sku_value_price")
+
+      //将当前克隆的规格组中的规格值保留一份
+      sku.find(".sku_value").not(sku.find(".sku_value").first()).remove();
+
+
+       //规格组添加到商品规格的末尾
+       sku.appendTo($(".spu-sku"));
+
+
+
+       });
+
+
+
+
+
+       //添加规格值
+      $(".btn-add-skuvalue").click(function(){
+      //将当前按钮所在的规格组中 最后-组规格值 克隆
+       let skuvalue=$(this).parents(".sku").find(".sku_value").last().clone(true);
+       //修改当前克隆的规格值的索引
+       skuvalue.attr("sku-value-index",$(this).parents(".sku").find(".sku_value").length);
+
+       //获取规格的索引和规格值的索引
+       let sku_index= $(this).parents(".sku").attr("sku-index");
+       let sku_value_index = skuvalue.attr("sku-value-index");
+       //修改复制的规格值的三个表单控件的name属性
+      skuvalue.find(".sku_value_img").attr("name","skuAddBoList ["+sku_index+"].skuValueList["+ sku_value_index+"].sku_value_img")
+      skuvalue.find(".sku_value_text").attr("name","skuAddBoList ["+sku_index+"].skuValueList["+ sku_value_index+"].sku_value_text")
+      skuvalue.find(".sku_value_price").attr("name","skuAddBoList ["+sku_index+"].skuValueList["+ sku_value_index+"].sku_value_price")
+
+        //将当前克隆的规格值添加到当前规格组中
+        skuvalue.appendTo($(this).parents(".sku"));
+
+        
+        })
+
+
+
+
+
+          // 一级分类 下拉列表 添加选项值改变
+           $(".category1").change(function(){
+           //获取当前选中的一级分类编号
+           let parent_id = $(this).val();
+           //发送ajax异步请求根据选中的一级分类编号查询下属的二级分类列表
+
+           $.ajax({
+           url : context+"spu/getCategoryListByParentId",
+           type : "GET",
+           data : {"parent_id" : parent_id},
+           success : function(response){
+           $(".category2").empty();
+           //迭代遍历每一个分类
+          for(let c of JSON.parse(response)){
+            //根据当前迭代遍历到的分类创建option 选项添加到二级分类下拉列表中
+            $(".category2").get(0).options.add(new Option(c.cate_name,c.id));
+               }
+            }
+          });
+   })
+
+})
+
+</script>
+
+</body>
+
+</html>

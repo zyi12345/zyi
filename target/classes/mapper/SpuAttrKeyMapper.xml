@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bwf.shop.admin.mapper.SpuAttrKeyMapper">
+<select id="getAllSpuAttrKeyList" resultMap="SpuAttrKey">
+    select * from spu_attr_key
+
+</select>
+<resultMap id="SpuAttrKey" type="com.bwf.shop.admin.bean.po.SpuAttrKey">
+
+    <id property="id" column="id" ></id>
+    <result property="key_name" column="key_name"></result>
+    <result property="createtime" column="createtime"></result>
+    <result property="updatetime" column="updatetime"></result>
+
+
+
+</resultMap>
+</mapper>

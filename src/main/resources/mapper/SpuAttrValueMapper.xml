@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bwf.shop.admin.mapper.SpuAttrValueMapper">
+<select id="getSpuAttrValueListByAttrKeyId" resultMap="SpuAttrValue">
+    select * from spu_attr_value
+    where value_attr_key_id = #{attr_key_id}
+
+
+</select>
+
+    <insert id="addSpuAttrValueRelations">
+        insert into spu_attr_value_spus(spu_attr_value_id,spu_id)
+     values
+
+        <foreach collection="spuAttrValueList" item="SpuAttrValue" separator=",">
+            (#{SpuAttrValue.id },#{spu_id})
+
+
+
+        </foreach>
+
+
+    </insert>
+
+
+
+
+    <resultMap id="SpuAttrValue" type="com.bwf.shop.admin.bean.po.SpuAttrValue">
+
+    <id property="id" column="id" ></id>
+    <result property="value_name" column="value_name"></result>
+    <result property="createtime" column="createtime"></result>
+    <result property="updatetime" column="updatetime"></result>
+    <result property="value_attr_key_id" column="value_attr_key_id"></result>
+
+
+
+</resultMap>
+</mapper>
