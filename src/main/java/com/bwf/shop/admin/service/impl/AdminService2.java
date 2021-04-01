@@ -66,6 +66,8 @@ public class AdminService2 implements IAdminService {
 
     @Override
     public boolean updateAdmin(AdminUpdateBo bo) {
+
+
         return adminMapper.updateAdmin(bo)>0;
     }
 }

@@ -11,6 +11,7 @@
         select a.*
         from admin a
         inner join admin_role b on a.admin_id=b.admin_id
+
         <where>
             <if test="bo.admin_id !=null">
                 a.admin_id=#{bo.admin_id}
